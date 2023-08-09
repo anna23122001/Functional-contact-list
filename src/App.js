@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {nanoid} from 'nanoid'
 
+import api from './contact-service';
 import initialState from './model/initialState';
 import ContactList from './components/ContactList/ContactList';
 import ContactForm from './components/ContactForm/ContactForm';
@@ -20,30 +21,31 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    setContacts(restoreContacts)
-  }, []);
-
-  function restoreContacts() {
-    const data = localStorage.getItem('contacts');
-    return data ? JSON.parse(data) : initialState;
-  };
-
-  function saveToStorage(contacts){
-    localStorage.setItem('contacts', JSON.stringify(contacts))
-  };
+  useEffect (() => {
+    api.get('/')
+    .then(({data}) => {
+      data ? setContacts(data) :
+      setContacts([])
+    })
+  }, [])
 
   function createContact(contact) {
     contact.id = nanoid();
-    const newContacts = [...contacts, contact];
-    setContacts(newContacts);
-    saveToStorage(newContacts)
+    api.post('/', contact)
+    .then(({data}) => {
+      const newContacts = [...contacts, data]
+      setContacts(newContacts);
+    })
   };
 
   function deleteContact(id) {
+    api.delete(`/${id}`)
+    .then(({status}) => {
+      return console.log(status)
+    })
+    .catch((e) => console.log(e))
     const newContacts = contacts.filter((contact) => contact.id !== id)
     setContacts(newContacts);
-    saveToStorage(newContacts);
     return {
       contacts,
       contactForEdit: createEmptyContact(),
@@ -60,15 +62,16 @@ function App() {
   };
 
   function updateContact(contact) {
-    const updatedContacts = contacts.map((item) =>
-      item.id === contact.id ? contact : item
-  );
-      setContacts(updatedContacts);
-      saveToStorage(updatedContacts);
-    return {
-        contacts,
-        contactForEdit: contact,
-  }};
+      api.put(`/${contact.id}`, contact)
+      .then((response) => {
+        const updatedContact = response.data;
+        setContacts((prevContact) => 
+          prevContact.map((prevContact) => (
+            prevContact.id !== updatedContact.id ? prevContact : updatedContact
+        )));
+        setContactForEdit(updatedContact);
+      })
+  };
 
   function saveContact(contact){
     if (!contact.id) {
