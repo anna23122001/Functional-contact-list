@@ -19,8 +19,8 @@ function ContactForm({ contactForEdit, onSubmit, onDelete }) {
   }
 
   function onInputChange(event) {
-    setContact((prevContact) => ({
-      ...prevContact,
+    setContact((contact) => ({
+      ...contact,
       [event.target.name]: event.target.value,
     }));
   }
@@ -32,8 +32,8 @@ function ContactForm({ contactForEdit, onSubmit, onDelete }) {
 
   function onClearField(event) {
     const sibling = event.target.parentNode.firstChild;
-    setContact((prevContact) => ({
-      ...prevContact,
+    setContact((contact) => ({
+      ...contact,
       [sibling.name]: '',
     }));
   }

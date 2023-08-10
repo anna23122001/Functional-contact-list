@@ -30,7 +30,6 @@ function App() {
   }, [])
 
   function createContact(contact) {
-    contact.id = nanoid();
     api.post('/', contact)
     .then(({data}) => {
       const newContacts = [...contacts, data]
@@ -41,20 +40,15 @@ function App() {
   function deleteContact(id) {
     api.delete(`/${id}`)
     .then(({status}) => {
-      return console.log(status)
+      return status
     })
     .catch((e) => console.log(e))
     const newContacts = contacts.filter((contact) => contact.id !== id)
     setContacts(newContacts);
-    return {
-      contacts,
-      contactForEdit: createEmptyContact(),
-    }
   };
   
   function addNewContact() {
-    const newEmptyContact = createEmptyContact()
-    setContactForEdit(newEmptyContact)
+    setContactForEdit(createEmptyContact)
   };
 
   function selectContact(contact){

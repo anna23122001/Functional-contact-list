@@ -1,21 +1,4 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  },
   "contacts": [
     {
       "firstName": "Анна",
@@ -37,39 +20,6 @@
       "email": "anna.riazantseva123321@gmail.com",
       "phone": "+38060784592",
       "id": "bzT5boajioGuJa6mBMrwX"
-    },
-    {
-      "0": {
-        "firstName": "Анна",
-        "lastName": "Рязанцева",
-        "email": "anna.riazantseva123321@gmail.com",
-        "phone": "+38060784592",
-        "id": "f9OcZQSEC3_lSBacU3xyy"
-      },
-      "1": {
-        "firstName": "Dacota",
-        "lastName": "Blue",
-        "email": "anna.riazantseva123321@gmail.com",
-        "phone": "+38060784592",
-        "id": "vnN6lDtB6PZsHrwV8rUTb"
-      },
-      "2": {
-        "firstName": "Anna",
-        "lastName": "Hatowe",
-        "email": "anna.riazantseva123321@gmail.com",
-        "phone": "+38060784592",
-        "id": "bzT5boajioGuJa6mBMrwX"
-      },
-      "3": {
-        "firstName": "Анна1",
-        "lastName": "Рязанцева",
-        "email": "anna.riazantseva123321@gmail.com",
-        "phone": "+38060784592",
-        "id": "0oD39k7VgRHGFN0EyJjHA"
-      },
-      "id": "0oD39k7VgRHGFN0EyJjHA",
-      "firstName": "Анна",
-      "lastName": "Рязанцева"
     }
   ]
 }
