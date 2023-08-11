@@ -57,14 +57,12 @@ function App() {
 
   function updateContact(contact) {
       api.put(`/${contact.id}`, contact)
-      .then((response) => {
-        const updatedContact = response.data;
-        setContacts((prevContact) => 
-          prevContact.map((prevContact) => (
-            prevContact.id !== updatedContact.id ? prevContact : updatedContact
-        )));
-        setContactForEdit(updatedContact);
+      .then(({data}) => {
+        setContacts(
+          contacts.map((item) => (item.id !== contact.id ? item : data))
+          );
       })
+      setContactForEdit(createEmptyContact());
   };
 
   function saveContact(contact){
