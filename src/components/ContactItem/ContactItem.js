@@ -1,7 +1,8 @@
 import React from 'react';
 import './ContactItem.css';
 
-function ContactItem({ contact, onDelete, onEdit }) {
+function ContactItem({contact, onDelete, onEdit }) {
+
   function onContactDelete() {
     onDelete(contact.id);
   }
